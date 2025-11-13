@@ -3,13 +3,14 @@ session_start();
 $user_id = $_SESSION['user_id'] ?? null; 
 
 if (!$user_id) {
-  header("Location: login.php");
+  header("Location: tempLogin.php");
   exit;
 }
 
+
 $rest_id = $_GET['rest_id'] ?? 1; 
 $sort = $_GET['sort'] ?? 'popular';
-include "functions/getRestaurantInfo.php"
+include "../functions/getRestaurantInfo.php";
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ include "functions/getRestaurantInfo.php"
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/restaurant_style.css" />
+    <link rel="stylesheet" href="../css/restaurant_style.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"

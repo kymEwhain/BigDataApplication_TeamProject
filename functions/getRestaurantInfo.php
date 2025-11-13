@@ -1,5 +1,5 @@
 <?php
-include 'sql/db.php';
+include '../sql/db.php';
 
 /**
  * 식당 헤더 렌더링 (이름 + 지역)
