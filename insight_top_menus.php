@@ -53,7 +53,7 @@ $menu_stats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html>
 <head>
-<title>카테고리별 통계</title>
+<title>카테고리별 메뉴 통계</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <style>
@@ -85,7 +85,7 @@ $menu_stats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </style>
 <body>
 
-<h2 style="text-align:center;">카테고리별 기간 통계</h2>
+<h2 style="text-align:center;">카테고리별 매출 및 팔린 메뉴 수</h2>
 
 <form method="GET" class="filter-form">
     <div style="display: flex; flex-direction: row; gap: 15px;">
@@ -151,7 +151,7 @@ new Chart(document.getElementById("lineChart"), {
     data: {
         labels: labels,
         datasets: [{
-            label: "월별 매출",
+            label: "월별 매출 ($)",
             data: sales,
             borderColor: "#5a66f2",
             tension: 0.3
