@@ -35,6 +35,7 @@ CREATE TABLE Menu (
   product_name VARCHAR(120) NOT NULL,
   price DECIMAL(10,2) NOT NULL,
   calories INT,
+  image_url VARCHAR(255),
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (rest_id) REFERENCES Restaurant(rest_id),
   FOREIGN KEY (category_id) REFERENCES Category(category_id),
