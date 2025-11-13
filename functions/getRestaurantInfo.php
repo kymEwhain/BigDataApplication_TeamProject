@@ -55,7 +55,7 @@ function renderMenuList($rest_id, $sort='popular') {
   foreach ($menus as $menu) {
         echo '
             <div class="menu-item hover">
-                <img src="' . htmlspecialchars($menu['image_url']) . '" 
+                <img src="../' . htmlspecialchars($menu['image_url']) . '" 
                      alt="' . htmlspecialchars($menu['product_name']) . '" />
                 <div class="menu-info">
                     <span class="menu-name">' . htmlspecialchars($menu['product_name']) . '</span>
