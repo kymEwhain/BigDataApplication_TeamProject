@@ -21,7 +21,6 @@ handleFavoriteToggle();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/restaurant_style.css" />
-    <link rel="stylesheet" href="../css/favorite_style.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
@@ -34,9 +33,14 @@ handleFavoriteToggle();
   <body>
     <div class="container">
       <!-- 뒤로 가기 버튼 -->
-      <button class="btn back-btn" onclick="history.back()">
-          <i class="bi bi-arrow-left"></i> Back
-      </button>
+        <div style="display:flex; flex-direction: row; justify-content: space-between;">
+          <button class="btn back-btn" onclick="history.back()">
+            <i class="bi bi-arrow-left"></i> Back
+          </button>
+          <button class="btn favoriteList-btn shadow" onclick="location.href='favorite.php';">
+            Favorites
+          </button>
+        </div>
       <!-- 헤더: 상단 식당 이름 및 지역 -->
       <div class="header shadow">
         <?php
