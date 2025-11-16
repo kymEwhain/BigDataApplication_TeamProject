@@ -7,10 +7,12 @@ if (!$user_id) {
   exit;
 }
 */
-
 $rest_id = $_GET['rest_id'] ?? 1; 
 $sort = $_GET['sort'] ?? 'popular';
-include "../functions/getRestaurantInfo.php";
+include_once "../functions/getRestaurantInfo.php";
+include_once "../functions/favorite.php";
+
+handleFavoriteToggle();
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +21,14 @@ include "../functions/getRestaurantInfo.php";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/restaurant_style.css" />
+    <link rel="stylesheet" href="../css/favorite_style.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/regular.min.css">
     <title>식당 페이지</title>
   </head>
   <body>
@@ -35,6 +41,7 @@ include "../functions/getRestaurantInfo.php";
       <div class="header shadow">
         <?php
           renderRestaurantHeader( $rest_id );
+          renderFavoriteButton($user_id, $rest_id);
         ?>
       </div>
 

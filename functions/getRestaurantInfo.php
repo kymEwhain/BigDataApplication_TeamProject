@@ -1,5 +1,5 @@
 <?php
-include '../sql/db.php';
+include_once '../sql/db.php';
 
 /**
  * 식당 헤더 렌더링 (이름 + 지역)
@@ -21,11 +21,13 @@ function renderRestaurantHeader($rest_id) {
 
   if ($res && $row = $res->fetch_assoc()) {
     echo '
+    <div class="restaurant-info">
       <div class="restaurant-name">' . htmlspecialchars($row['restaurant_name']) . '</div>
       <div class="header-btns">
         <button class="btn header-btn">' . htmlspecialchars($row['city']) . ', ' . htmlspecialchars($row['country']) . '</button>
         <button class="btn header-btn" onclick="location.href=\'./allReviewsPage.php?rest_id='.$rest_id.'\'">review</button>
       </div>
+    </div>
       ';
   } else {
     echo "<div>식당 정보를 찾을 수 없습니다.</div>";
@@ -266,8 +268,4 @@ function hasUserReviewed($rest_id, $user_id) {
     
     return $row['cnt'] > 0;
 }
-
-
-
-
 ?>
