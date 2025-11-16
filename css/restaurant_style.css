@@ -125,7 +125,8 @@ body {
 }
 
 .menu-List {
-  overflow-y: auto;
+  max-height: 400px;
+  overflow-y: scroll;
   padding-right: 15px;
 }
 
@@ -234,6 +235,7 @@ body {
   font-weight: bold;
   font-size: 17px;
   transition: all 0.2s ease;
+  margin-top: auto;
 }
 
 .review-btn:hover {

@@ -1,12 +1,12 @@
 <?php
 session_start();           
 $user_id = $_SESSION['user_id'] ?? null; 
-
+/*
 if (!$user_id) {
   header("Location: tempLogin.php");
   exit;
 }
-
+*/
 
 $rest_id = $_GET['rest_id'] ?? 1; 
 $sort = $_GET['sort'] ?? 'popular';

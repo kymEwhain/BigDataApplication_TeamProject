@@ -24,7 +24,7 @@ function renderRestaurantHeader($rest_id) {
       <div class="restaurant-name">' . htmlspecialchars($row['restaurant_name']) . '</div>
       <div class="header-btns">
         <button class="btn header-btn">' . htmlspecialchars($row['city']) . ', ' . htmlspecialchars($row['country']) . '</button>
-        <button class="btn header-btn" onclick="location.href=\'tempAllReviews.php?rest_id='.$rest_id.'\'">review</button>
+        <button class="btn header-btn" onclick="location.href=\'./allReviewsPage.php?rest_id='.$rest_id.'\'">review</button>
       </div>
       ';
   } else {
