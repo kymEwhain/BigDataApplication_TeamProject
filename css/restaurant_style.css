@@ -19,8 +19,9 @@ body {
 
 .header {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 20px;
   height: 100px;
   margin-bottom: 30px;
@@ -68,6 +69,7 @@ body {
 .restaurant-name {
   font-size: 2rem;
   font-weight: 700;
+  margin-bottom: 15px;
 }
 
 .header-btns {
