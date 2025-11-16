@@ -177,10 +177,17 @@ function renderReviewList($rest_id) {
     foreach ($reviews as $review) {
         $stars = str_repeat('<i class="bi bi-star-fill"></i>', $review['score']);
         $date = substr($review['created_at'], 0, 10);
+        $myBadge = $review['is_mine'] ?
+            "<span style='font-size:11px;
+                        background:#007bff;
+                        color:white;
+                        padding:0px 6px 2px;
+                        border-radius:12px;
+                        margin-left:5px;'>my</span>" : "";
         
         echo '
             <div class="review-item shadow">
-                <div class="stars small" style="margin-bottom: 5px;">' . $stars . '</div>
+                <div class="stars small" style="margin-bottom: 5px;">' . $stars . $myBadge . '</div>
                 <div class="review-text">' . htmlspecialchars($review['comment']) . '</div>
                 <div class="review-date">' . htmlspecialchars($date) . '</div>
             </div>
@@ -191,19 +198,24 @@ function renderReviewList($rest_id) {
 /**
  * 리뷰 목록 조회 (배열로 반환)
  * @param int $rest_id 식당 ID
- * @param int $limit 조회 개수
  * @return array 리뷰 목록
  */
 function getReviewList($rest_id) {
     $mysqli = connectDB();
+    $user_id = $_SESSION['user_id'] ?? 0;
     
     $stmt = $mysqli->prepare("
-      SELECT * FROM Review 
+      SELECT 
+        Review.*, 
+        (user_id = ?) AS is_mine 
+      FROM Review
       WHERE rest_id = ?
-      ORDER BY created_at DESC 
+      ORDER BY 
+        (user_id = ?) DESC,
+        created_at DESC 
       LIMIT 2
     ");
-    $stmt->bind_param("i", $rest_id);
+    $stmt->bind_param("iii", $user_id,$rest_id, $user_id);
     $stmt->execute();
     $res = $stmt->get_result();
     $reviews = $res->fetch_all(MYSQLI_ASSOC);
