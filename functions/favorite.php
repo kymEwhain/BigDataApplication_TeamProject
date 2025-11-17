@@ -1,5 +1,6 @@
 <?php
 include_once "../sql/db.php";
+include_once "getRestaurantInfo.php";
 
 /**
  * 즐겨찾기 여부 확인
@@ -145,6 +146,47 @@ function getUserFavorites($user_id) {
 }
 
 /**
+ * 사용자의 즐겨찾기 목록과 식당 정보 가져오기
+ * @param int $user_id 사용자 ID
+ * @return array 식당 정보 배열
+ */
+function getUserFavoriteRestaurants($user_id) {
+    if (!$user_id) return [];
+
+    try {
+        $mysqli = connectDB();
+
+        $sql = "
+            SELECT r.rest_id, r.name, r.rating, CONCAT(rg.country, ' ', rg.city) AS region_name
+            FROM Favorite f
+            JOIN Restaurant r ON f.rest_id = r.rest_id
+            LEFT JOIN Region rg ON r.region_id = rg.region_id
+            WHERE f.user_id = ?
+            ORDER BY f.created_at DESC
+        ";
+
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $restaurants = [];
+        while ($row = $result->fetch_assoc()) {
+            $restaurants[] = $row;
+        }
+
+        $stmt->close();
+        $mysqli->close();
+
+        return $restaurants;
+    } catch (Exception $e) {
+        error_log("getUserFavoriteRestaurants Error: " . $e->getMessage());
+        return [];
+    }
+}
+
+
+/**
  * 즐겨찾기 토글 요청 처리 (GET 방식)
  * 페이지 로드 시 자동으로 실행됨
  */
@@ -202,12 +244,83 @@ function renderFavoriteButton($user_id, $rest_id, $size = 'medium') {
     
     // 버튼 HTML (링크 방식)
     echo '
-    <div>
         <a href="'.$toggleUrl.'" 
             class="favorite-btn '.$sizeClass.' '.$activeClass.'" 
             title="'.($isFavorited ? 'Remove from favorites' : 'Add to favorites').'">
             <i class="fa-heart '.$iconClass.'"></i>
         </a>
-    </div>';
+    ';
 }
+
+/**
+ * 즐겨찾기 페이지 식당 목록 렌더링
+ * @param int $user_id 사용자 ID
+ */
+function renderFavoriteList($user_id){
+    $restaurants = getUserFavoriteRestaurants($user_id);
+
+    if (empty($restaurants)) {
+        echo "<p>즐겨찾기한 식당이 없습니다.</p>";
+        return;
+    }
+
+    foreach ($restaurants as $rest) {
+        echo '<div class="restaurant_item shadow">';
+        
+        // 식당 정보 + 이미지
+        echo '<div class="restaurant_info" style="
+                flex: 0.9;
+                display: flex;
+                flex-direction: row;
+                margin-left: 10px;
+                align-items: center;
+            ">';
+        
+        $image_path = "../images/restaurants/" . $rest['rest_id'] . ".jpg";
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+            $image_path = "../images/restaurants/default.jpg";
+        }
+
+        echo '<img src="' . $image_path . '" alt="' . htmlspecialchars($rest['name']) . '">';
+        
+        echo '<div class="restaurant_text">';
+        echo '<div class="restaurant_name" style="font-weight:bold;">' . htmlspecialchars($rest['name']) . '</div>';
+        
+        // 별 평점
+        $stats = getReviewStats($rest['rest_id']);
+        $maxStars = 5; // 만점 5
+
+        if ($stats && $stats['avg_score'] !== null) {
+            $fullStars = floor($stats['avg_score']); // 꽉 찬 별
+            $halfStar = ($stats['avg_score'] - $fullStars >= 0.5) ? 1 : 0; // 반 별
+            $emptyStars = $maxStars - $fullStars - $halfStar; // 빈 별 수
+
+            $starsHtml = str_repeat('<i class="bi bi-star-fill"></i>', $fullStars); // 꽉 찬 별
+            if ($halfStar) $starsHtml .= '<i class="bi bi-star-half"></i>'; // 반 별
+            $starsHtml .= str_repeat('<i class="bi bi-star"></i>', $emptyStars); // 빈 별
+        } else {
+            // 리뷰 없는 경우: 빈 별 5개
+            $starsHtml = str_repeat('<i class="bi bi-star"></i>', $maxStars);
+        }
+
+        echo '<div class="stars small">' . $starsHtml . '</div>';
+
+
+        echo '<div class="restaurant_region" style="color:grey;">' . htmlspecialchars($rest['region_name']) . '</div>';
+
+        echo '</div>'; // restaurant_text
+
+        echo '</div>'; // restaurant_info
+
+        // 즐겨찾기 버튼
+        echo '<div style="margin-top: 35px; margin-right: 15px;">';
+        renderFavoriteButton($user_id, $rest['rest_id'], 'large');
+        echo '</div>';
+
+        echo '</div>'; // restaurant_item
+    }
+}
+
+
+
 ?>
