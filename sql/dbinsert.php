@@ -1,3 +1,4 @@
+<!-- 217100 Kim Yumin -->
 <?php
 
 function connectDB() {
