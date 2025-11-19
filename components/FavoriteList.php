@@ -20,33 +20,31 @@ include_once "../functions/favorite.php";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/favorite_style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    />
+    <link rel="stylesheet" href="../css/rest-module-ui.css" />
+    <link rel="stylesheet" href="../css/favorite-list.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/regular.min.css">
     <title>식당 페이지</title>
-    <title>My favorite Restaurants</title>
+    <title>My Favorite Restaurants</title>
   </head>
   <body>
-    <div class="container">
+    <div class="l-container">
       <!-- 뒤로 가기 버튼 -->
-      <div style="display:flex; flex-direction: row; justify-content: space-between;">
-          <button class="btn back-btn" onclick="location.href='<?= $from_rest_id ? 'restaurant.php?rest_id='.$from_rest_id : 'tmpRestaurantClick.php' ?>';">
+      <div class="l-toolbar">
+          <button class="btn back-btn" onclick="location.href='<?= $from_rest_id ? 'RestaurantDetail.php?rest_id='.$from_rest_id : 'tmpRestaurantClick.php' ?>';">
             <i class="bi bi-arrow-left"></i> Back
           </button>
-          <h3 style="padding: 20px;"> my Favorite Restaurants </h3>
+          <h3 class="l-toolbar__title"> My Favorite Restaurants </h3>
           <button class="btn favoriteList-btn shadow invisible" onclick="location.href='favorite.php';">
             Favorites
           </button>
         </div>
       
       <!-- 본문 -->
-      <div class="content">
-        <div class="favorite_list">
+      <div class="l-content-list">
+        <div class="favorite-list scroll">
           <?php 
           handleFavoriteToggle();
           renderFavoriteList($user_id); ?>

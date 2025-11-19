@@ -1,0 +1,219 @@
+/* 2171007 Kim Yumin */
+
+/* ========== 레이아웃 ========== */
+.l-container {
+  height: 100%;
+}
+
+.rest-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  height: 100px;
+  margin-bottom: 30px;
+  border-radius: 30px;
+  padding: 20px 40px;
+  color: white;
+  background: linear-gradient(to right, #61a5fa, #3a7de9);
+}
+
+/* ========== 헤더 ========== */
+.rest-header__name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.rest-header__btns {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.rest-header__btn {
+  background-color: #f2f3f7;
+  padding: 6px 14px;
+  color: #3a7de9;
+  font-size: 16px;
+}
+
+/* ========== 본문 ========== */
+.back-btn {
+  width: 90px;
+  padding: 8px 14px;
+  margin: 50px 0px 30px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+}
+
+.favoriteList-btn {
+  margin: 50px 0px 30px;
+  background: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 550;
+  color: #3a7de9;
+}
+
+.l-content-main {
+  display: flex;
+  gap: 30px;
+  height: 600px;
+  flex-wrap: wrap;
+}
+
+/* ========== 메뉴 카드 ========== */
+.menu-block {
+  padding: 20px 40px;
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+}
+
+.menu-block__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.menu-block__sort select {
+  border-color: #e9e9e9;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: white;
+  font-size: 14px;
+}
+
+.menu-block__list {
+  max-height: 400px;
+  overflow-y: scroll;
+  padding-right: 15px;
+}
+
+.subtitle {
+  color: gray;
+  margin: 0px;
+}
+
+.menu-list__item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.menu-list__item:hover {
+  background: linear-gradient(45deg, #ffffff, #eeeeee);
+  transform: translateX(6px);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.menu-list__item img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.menu-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-item__name {
+  font-weight: bold;
+}
+
+.menu-item__price {
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(to right, #f39600, #ed8b49);
+  border-radius: 30px;
+  text-align: center;
+  padding: 3px 0px;
+  width: 80px;
+  font-size: 14px;
+}
+
+/* ========== 리뷰 카드 ========== */
+.review-summary-block {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: transparent;
+  text-transform: lowercase;
+}
+
+.review-summary-block__total {
+  height: 240px;
+  padding: 20px 40px;
+  border-radius: 30px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.review-summary-block__total h2 {
+  margin-bottom: 0px;
+}
+
+.review-summary-block__count {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.review-summary-block__action {
+  width: 160px;
+  align-self: flex-end;
+  background-color: #73c863;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 17px;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.review-summary-block__action:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.review-block__list {
+  height: 300px;
+  background-color: transparent;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-list__item {
+  padding: 27px 40px;
+  background-color: white;
+  border-radius: 30px;
+}
+
+.review-item__text {
+  color: #555555;
+  font-size: 1.1rem;
+}
+
+.review-item__date {
+  text-align: right;
+  font-size: 1rem;
+  color: #666;
+  margin-top: 4px;
+}

@@ -22,11 +22,11 @@ function renderRestaurantHeader($rest_id) {
 
   if ($res && $row = $res->fetch_assoc()) {
     echo '
-    <div class="restaurant-info">
-      <div class="restaurant-name">' . htmlspecialchars($row['restaurant_name']) . '</div>
-      <div class="header-btns">
-        <button class="btn header-btn">' . htmlspecialchars($row['city']) . ', ' . htmlspecialchars($row['country']) . '</button>
-        <button class="btn header-btn" onclick="location.href=\'./allReviewsPage.php?rest_id='.$rest_id.'\'">review</button>
+    <div class="rest-header__info">
+      <div class="rest-header__name">' . htmlspecialchars($row['restaurant_name']) . '</div>
+      <div class="rest-header__btns">
+        <button class="btn rest-header__btn">' . htmlspecialchars($row['city']) . ', ' . htmlspecialchars($row['country']) . '</button>
+        <button class="btn rest-header__btn" onclick="location.href=\'./AllReviews.php?rest_id='.$rest_id.'\'">review</button>
       </div>
     </div>
       ';
@@ -57,12 +57,12 @@ function renderMenuList($rest_id, $sort='popular') {
 
   foreach ($menus as $menu) {
         echo '
-            <div class="menu-item hover">
+            <div class="menu-list__item hover">
                 <img src="../' . htmlspecialchars($menu['image_url']) . '" 
                      alt="' . htmlspecialchars($menu['product_name']) . '" />
-                <div class="menu-info">
-                    <span class="menu-name">' . htmlspecialchars($menu['product_name']) . '</span>
-                    <span class="menu-price shadow">$' . htmlspecialchars($menu['price']) . '</span>
+                <div class="menu-item__info">
+                    <span class="menu-item__name">' . htmlspecialchars($menu['product_name']) . '</span>
+                    <span class="menu-item__price shadow">$' . htmlspecialchars($menu['price']) . '</span>
                 </div>
             </div>
         ';
@@ -131,7 +131,7 @@ function renderRating($rest_id) {
         
         echo '
             <div class="stars">' . $stars . '</div>
-            <div class="review-count">
+            <div class="review-summary-block__count">
                 <span style="color:#4d4d4d">Total review</span>
                 <span style="font-size:25px; font-weight:bold">'.$stats['review_count'].'</span>
             </div>
@@ -189,10 +189,10 @@ function renderReviewList($rest_id) {
                         margin-left:5px;'>my</span>" : "";
         
         echo '
-            <div class="review-item shadow">
+            <div class="review-list__item shadow">
                 <div class="stars small" style="margin-bottom: 5px;">' . $stars . $myBadge . '</div>
-                <div class="review-text">' . htmlspecialchars($review['comment']) . '</div>
-                <div class="review-date">' . htmlspecialchars($date) . '</div>
+                <div class="review-item__text">' . htmlspecialchars($review['comment']) . '</div>
+                <div class="review-item__date">' . htmlspecialchars($date) . '</div>
             </div>
         ';
     }
@@ -237,14 +237,14 @@ function getReviewList($rest_id) {
  */
 function renderReviewButton($rest_id, $user_id = null) {
     if (!$user_id) {
-        echo '<button class="btn review-btn shadow" onclick="alert(\'로그인 후 작성 가능합니다.\')">Do/fix review</button>';
+        echo '<button class="btn review-summary-block__action shadow" onclick="alert(\'로그인 후 작성 가능합니다.\')">Do/fix review</button>';
         return;
     }
     
     $hasReview = hasUserReviewed($rest_id, $user_id);
     $btnText = $hasReview ? "Fix review" : "Do review";
     
-    echo '<button class="btn review-btn shadow" 
+    echo '<button class="btn review-summary-block__action shadow" 
           onclick="location.href=\'tempReviewWrite.php?rest_id='.$rest_id.'&user_id='.$user_id.'\'">'
           .$btnText.'</button>';
 }

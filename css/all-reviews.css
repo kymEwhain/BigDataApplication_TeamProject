@@ -1,0 +1,63 @@
+.l-container {
+  background: #fff;
+  border-radius: 12px;
+  width: 700px;
+}
+
+.header {
+  background: transparent;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 30px;
+  justify-content: space-between;
+}
+
+.btn {
+  background-color: #4a9df8;
+  color: white;
+  font-weight: bold;
+  width: 60px;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+}
+
+.review-list-block {
+  padding: 0px 30px 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* 화면의 80% 높이 */
+  overflow-y: auto; /* 카드 안에서만 스크롤 */
+}
+
+.review-list-block__item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.review-list-block__item:last-child {
+  border-bottom: none;
+}
+
+.review-item__text {
+  color: #ff6600;
+  font-weight: bold;
+}
+
+.review-item__date {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.no-reviews {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}

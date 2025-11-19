@@ -221,7 +221,7 @@ function handleFavoriteToggle() {
 function renderFavoriteButton($user_id, $rest_id, $size = 'medium') {
     // 로그인하지 않은 경우
     if (!$user_id) {
-        echo '<a href="../pages/login.php" class="favorite-btn favorite-login-required" 
+        echo '<a href="../components/tempLogin.php" class="favorite-btn favorite-login-required" 
                  title="Login required">
                 <i class="fa-regular fa-heart"></i>
               </a>';
@@ -265,16 +265,10 @@ function renderFavoriteList($user_id){
     }
 
     foreach ($restaurants as $rest) {
-        echo '<div class="restaurant_item shadow">';
+        echo '<div class="favorite-list__item shadow">';
         
         // 식당 정보 + 이미지
-        echo '<div class="restaurant_info" style="
-                flex: 0.9;
-                display: flex;
-                flex-direction: row;
-                margin-left: 10px;
-                align-items: center;
-            ">';
+        echo '<div class="restaurant-item__info">';
         
         $image_path = "../images/restaurants/" . $rest['rest_id'] . ".jpg";
         if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
@@ -283,8 +277,8 @@ function renderFavoriteList($user_id){
 
         echo '<img src="' . $image_path . '" alt="' . htmlspecialchars($rest['name']) . '">';
         
-        echo '<div class="restaurant_text">';
-        echo '<div class="restaurant_name" style="font-weight:bold;">' . htmlspecialchars($rest['name']) . '</div>';
+        echo '<div class="restaurant-item__text">';
+        echo '<div class="restaurant-item__name" style="font-weight:bold;">' . htmlspecialchars($rest['name']) . '</div>';
         
         // 별 평점
         $stats = getReviewStats($rest['rest_id']);
@@ -306,14 +300,14 @@ function renderFavoriteList($user_id){
         echo '<div class="stars small">' . $starsHtml . '</div>';
 
 
-        echo '<div class="restaurant_region" style="color:grey;">' . htmlspecialchars($rest['region_name']) . '</div>';
+        echo '<div class="restaurant-item__region">' . htmlspecialchars($rest['region_name']) . '</div>';
 
         echo '</div>'; // restaurant_text
 
         echo '</div>'; // restaurant_info
 
         // 즐겨찾기 버튼
-        echo '<div style="margin-top: 35px; margin-right: 15px;">';
+        echo '<div class="restaurant-item__actions">';
         renderFavoriteButton($user_id, $rest['rest_id'], 'large');
         echo '</div>';
 
