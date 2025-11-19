@@ -229,6 +229,58 @@ function getReviewList($rest_id) {
     return $reviews;
 }
 
+/**
+ * 모든 리뷰 리스트 렌더링
+ * @param int $rest_id 식당 ID
+ */
+function renderAllReviewsList($rest_id) {
+    $reviews = getAllReviewsList($rest_id); 
+    
+    if (empty($reviews)) {
+        echo "<div class='no-reviews'>No reviews yet</div>";
+        return;
+    }
+    
+    foreach ($reviews as $review) {
+        $stars = str_repeat('<i class="bi bi-star-fill"></i>', $review['score']);
+        $date = substr($review['created_at'], 0, 10);
+        $comment = htmlspecialchars($review['comment']); 
+        
+        echo "
+            <div class='review-list-block__item'>
+                <div class='stars small'>$stars</div>
+                <div class='review-item__text'>$comment</div>
+                <div class='review-item__date'>$date</div>
+            </div>
+        ";
+    }
+}
+
+/**
+ * 모든 리뷰 목록 조회 (배열로 반환)
+ * @param int $rest_id 식당 ID
+ * @return array 모든 리뷰 목록
+ */
+function getAllReviewsList($rest_id) {
+    $mysqli = connectDB();
+    
+    $stmt = $mysqli->prepare("
+      SELECT * FROM Review
+      WHERE rest_id = ?
+      ORDER BY 
+        created_at DESC 
+    ");
+
+    $stmt->bind_param("i", $rest_id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $reviews = $res->fetch_all(MYSQLI_ASSOC);
+    
+    $stmt->close();
+    $mysqli->close();
+    
+    return $reviews;
+}
 
 /**
  * 리뷰 작성/수정 버튼 렌더링
