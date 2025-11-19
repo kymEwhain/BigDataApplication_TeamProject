@@ -97,7 +97,7 @@ function toggleFavorite($user_id, $rest_id) {
     
     if ($isFavorited) {
         // 즐겨찾기 삭제
-        $success = removeFavorite($user_id, rest_id: $rest_id);
+        $success = removeFavorite($user_id, $rest_id);
         return [
             'success' => $success,
             'action' => 'removed',
