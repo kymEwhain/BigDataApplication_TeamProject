@@ -1066,7 +1066,7 @@ INSERT INTO Trend (trend_id, category_id, year, season, popularity_index) VALUES
 (47, 6, 2024, 'Autumn', 87),
 (48, 6, 2024, 'Winter', 67);
 
-INSERT INTO Favorite (favorite_id, user_id, menu_id, created_at) VALUES
+INSERT INTO Favorite (fav_id, user_id, menu_id, created_at) VALUES
 (1, 1, 10, '2024-01-15'),
 (2, 2, 23, '2024-02-12'),
 (3, 3, 45, '2024-03-10'),
