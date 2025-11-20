@@ -221,7 +221,7 @@ function handleFavoriteToggle() {
 function renderFavoriteButton($user_id, $rest_id, $size = 'medium') {
     // 로그인하지 않은 경우
     if (!$user_id) {
-        echo '<a href="../components/tempLogin.php" class="favorite-btn favorite-login-required" 
+        echo '<a href="../components/login.php" class="favorite-btn favorite-login-required" 
                  title="Login required">
                 <i class="fa-regular fa-heart"></i>
               </a>';
