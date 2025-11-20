@@ -27,12 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$user || !password_verify($password, $user['password_hash'])) {
             $errors[] = '이메일 또는 비밀번호가 올바르지 않습니다.';
         } else {
-            // 세션에 최소 정보 저장
-            $_SESSION['user_id']   = $user['user_id'];
-            $_SESSION['user_name'] = $user['name'];
+            // 세션에 저장
+            $_SESSION['user_id']    = $user['user_id'];
+            $_SESSION['user_name']  = $user['name'];
             $_SESSION['user_email'] = $user['email'];
 
-            // 로그인 후 레스토랑 페이지로 이동(예시)
             header('Location: main.php');
             exit;
         }
@@ -49,17 +48,53 @@ $just_registered = isset($_GET['registered']);
     <meta charset="UTF-8">
     <title>login</title>
     <style>
-        body { background: #E7ECFF; font-family: sans-serif; }
-        .page-wrapper { display:flex; justify-content:center; padding-top:120px; }
+        body { background: #E7ECFF; font-family: sans-serif; margin:0; padding:0; }
+
+        /* 상단 서비스 이름 */
+        .brand-header {
+            width: 100%;
+            text-align: center;
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #4f46e5;
+            padding-top: 40px;
+        }
+
+        .page-wrapper { display:flex; justify-content:center; padding-top:50px; }
         .card { width:380px; }
-        .card-title { font-size:28px; font-weight:700; margin-bottom:30px; }
-        .input-text { width:100%; padding:14px; margin-bottom:15px; border-radius:6px; border:1px solid #c7d2fe; }
-        .btn { width:100%; padding:14px; background:#4f8ffb; color:white; border:none; border-radius:8px; }
-        .error-message { background:#fee2e2; padding:10px; margin-bottom:15px; border-radius:6px; color:#b91c1c; }
-        .success-message { background:#d1fae5; padding:10px; margin-bottom:15px; border-radius:6px; color:#065f46; }
+        .card-title { font-size:28px; font-weight:700; margin-bottom:30px; text-align:center; }
+
+        .input-text {
+            width:100%; padding:14px; margin-bottom:15px;
+            border-radius:6px; border:1px solid #c7d2fe;
+        }
+        .btn {
+            width:100%; padding:14px;
+            background:#4f8ffb; color:white; border:none; border-radius:8px;
+            cursor:pointer;
+        }
+        .btn-secondary {
+            width:100%; padding:14px;
+            background:#64748b; color:white; border:none; border-radius:8px;
+            margin-top:10px; cursor:pointer;
+        }
+
+        .error-message {
+            background:#fee2e2; padding:10px; margin-bottom:15px;
+            border-radius:6px; color:#b91c1c;
+        }
+        .success-message {
+            background:#d1fae5; padding:10px; margin-bottom:15px;
+            border-radius:6px; color:#065f46;
+        }
     </style>
 </head>
 <body>
+
+<!-- 서비스 이름 -->
+<div class="brand-header">뀨asty</div>
+
 <div class="page-wrapper">
     <div class="card">
         <h1 class="card-title">login</h1>
@@ -84,7 +119,13 @@ $just_registered = isset($_GET['registered']);
 
             <button type="submit" class="btn">Log in</button>
         </form>
+
+        <!-- 회원가입 버튼 -->
+        <a href="register.php">
+            <button class="btn-secondary">회원가입</button>
+        </a>
     </div>
 </div>
+
 </body>
 </html>
