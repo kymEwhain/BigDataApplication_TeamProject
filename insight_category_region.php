@@ -93,6 +93,7 @@ $iso_to_country_json = json_encode($iso_to_country, JSON_UNESCAPED_UNICODE);
 <meta charset="UTF-8">
 <title>지역별 인기도 분석</title>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
@@ -110,9 +111,15 @@ body{
 </head>
 
 <body>
+
 <div class="container mt-4">
 
-<h2 class="text-center"><b>카테고리별 매출 분석 - 지역별 매출</b></h2>
+<div class="d-flex align-items-center mb-3">
+    <a href="index.php" class="btn btn-light border rounded-circle p-2 shadow-sm">
+        <i class="bi bi-house-fill fs-3"></i>
+    </a>
+    <h2 class="m-0 flex-grow-1 text-center"><b>카테고리별 매출 분석 - 지역별 매출</b></h2>
+</div>
 
 <form method="GET" class="row g-3 border p-4 rounded mt-4">
 
