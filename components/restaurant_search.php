@@ -80,7 +80,8 @@ while ($row = $res->fetch_assoc()) {
         }
         $cityGroups[$cityKey]['restaurants'][] = [
             'name'=>$name,
-            'avg'=>$avg
+            'avg'=>$avg,
+            'rest_id'=>$restId
         ];
 
         /* 국가 그룹 */
@@ -95,7 +96,8 @@ while ($row = $res->fetch_assoc()) {
         $countryGroups[$country]['restaurants'][] = [
             'city'=>$city,
             'name'=>$name,
-            'avg'=>$avg
+            'avg'=>$avg,
+            'rest_id'=>$restId
         ];
     }
     /* 2) 도시 ROLLUP */
@@ -164,7 +166,7 @@ function toggleBox(id){
       <?php foreach ($restaurants as $i=>$r): ?>
         <?php
           $color     = ($i%2===0? 'row-blue':'row-green');
-          $detailUrl = 'components/RestaurantDetail.php?rest_id=' . urlencode($r['rest_id']);
+          $detailUrl = 'RestaurantDetail.php?rest_id=' . urlencode($r['rest_id']);
         ?>
         <!-- 전체 배너를 링크로 감싸기 -->
         <a href="<?= $detailUrl ?>" class="text-decoration-none d-block">
@@ -201,7 +203,7 @@ function toggleBox(id){
 
         <div class="child-box" id="<?= $boxId ?>">
         <?php foreach ($g['restaurants'] as $cr): ?>
-            <div class="child-card">
+            <div class="child-card" onclick="location.href='RestaurantDetail.php?rest_id=<?= $cr['rest_id'] ?? 1 ?>'">
               <div><?= htmlspecialchars($cr['name']) ?></div>
               <div class="score-text">
                 <?= is_null($cr['avg']) ? '-' : number_format($cr['avg'], 2) ?>
@@ -233,7 +235,7 @@ function toggleBox(id){
 
         <div class="child-box" id="<?= $boxId ?>">
         <?php foreach ($g['restaurants'] as $cr): ?>
-            <div class="child-card">
+            <div class="child-card" onclick="location.href='RestaurantDetail.php?rest_id=<?= $cr['rest_id'] ?? 1 ?>'">
               <div>
                 <div class="fw-semibold"><?= htmlspecialchars($cr['name']) ?></div>
                 <div class="subtext"><?= htmlspecialchars($cr['city']) ?></div>

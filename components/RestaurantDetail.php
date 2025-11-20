@@ -33,8 +33,7 @@ handleFavoriteToggle();
     <div class="l-container">
       <!-- 툴바 -->
         <div class="l-toolbar">
-          <!-- TODO: 식당 선택 페이지 경로 수정 -->
-          <button class="btn back-btn" onclick="location.href='tmpRestaurantClick.php';">
+          <button class="btn back-btn" onclick="location.href='restaurant_search.php';">
             <i class="bi bi-arrow-left"></i> Back
           </button>
           <button class="btn favoriteList-btn shadow" onclick="location.href='FavoriteList.php?from_rest_id=<?= $rest_id ?>';">

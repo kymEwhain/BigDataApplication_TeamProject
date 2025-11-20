@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once 'db.php'; // connectDB() 불러옴
+require_once '../sql/db.php'; // connectDB() 불러옴
 
 $errors = [];
 $name = '';

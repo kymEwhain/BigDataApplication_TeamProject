@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once '../sql/db.php';
 
 $mysqli = connectDB();
 
@@ -55,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
 
             $success = "리뷰가 수정되었습니다.";
+            header("Location: RestaurantDetail.php?rest_id=$rest_id");
+            exit;
         }
 
     } elseif ($action === 'delete') {
@@ -62,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ii", $review_id, $user_id);
         $stmt->execute();
 
-        header("Location: review_new.php?rest_id=$rest_id");
+        header("Location: RestaurantDetail.php?rest_id=$rest_id");
         exit;
     }
 }
@@ -72,12 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>내 리뷰 수정</title>
-    <link rel="stylesheet" href="log_reg_rev_style.css">
+    <link rel="stylesheet" href="../css/log_reg_rev_style.css">
 </head>
 <body>
-<div class="top-nav">
-    <span>/my_review.php · INSERT, DELETE, UPDATE</span>
-</div>
 
 <div class="page-wrapper">
     <div class="card card-wide">

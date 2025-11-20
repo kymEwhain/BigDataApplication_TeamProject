@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once '../sql/db.php';
 
 $mysqli = connectDB();
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("iiis", $user_id, $rest_id, $score, $comment);
         $stmt->execute();
 
-        header("Location: my_review.php?rest_id=$rest_id");
+        header("Location: RestaurantDetail.php?rest_id=$rest_id");
         exit;
     }
 }
@@ -59,12 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>새 리뷰 작성</title>
-    <link rel="stylesheet" href="log_reg_rev_style.css">
+    <link rel="stylesheet" href="../css/log_reg_rev_style.css">
 </head>
 <body>
-<div class="top-nav">
-    <span>/review_new.php</span>
-</div>
 
 <div class="page-wrapper">
     <div class="card card-wide">

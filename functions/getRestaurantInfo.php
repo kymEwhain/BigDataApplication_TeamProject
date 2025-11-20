@@ -292,14 +292,17 @@ function renderReviewButton($rest_id, $user_id = null) {
         echo '<button class="btn review-summary-block__action shadow" onclick="alert(\'로그인 후 작성 가능합니다.\')">Do/fix review</button>';
         return;
     }
-    
+
     $hasReview = hasUserReviewed($rest_id, $user_id);
     $btnText = $hasReview ? "Fix review" : "Do review";
-    
+    $targetPage = $hasReview ? "my_review.php" : "review_new.php";
+
     echo '<button class="btn review-summary-block__action shadow" 
-          onclick="location.href=\'tempReviewWrite.php?rest_id='.$rest_id.'&user_id='.$user_id.'\'">'
-          .$btnText.'</button>';
+            onclick="location.href=\'../components/'.$targetPage.'?rest_id='.$rest_id.'&user_id='.$user_id.'\'">'
+            .$btnText.
+         '</button>';
 }
+
 
 /**
  * 사용자가 리뷰를 작성했는지 확인

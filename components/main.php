@@ -112,6 +112,10 @@ $values = array_map(fn($r) => (int)$r['orders'], $topRows);
 
   <div class="d-flex align-items-center gap-2 mb-4">
     <div class="brand">뀨asty</div>
+    <!-- 로그아웃 버튼 -->
+    <a href="logout.php" class="btn btn-outline-dark fw-bold px-4">
+      로그아웃
+    </a>
   </div>
 
   <div class="row g-4">
@@ -169,8 +173,8 @@ $values = array_map(fn($r) => (int)$r['orders'], $topRows);
 
   <!-- 하단 네비 버튼 -->
   <div class="d-flex flex-wrap gap-3 justify-content-center mt-5">
-    <a href="/insight_top_menus.php" class="btn btn-primary btn-wide">카테고리별 통계 검색</a>
-    <a href="/insight_region_season.php" class="btn btn-info btn-wide text-white">지역×계절 통계 검색</a>
+    <a href="/insight_category_menus.php" class="btn btn-primary btn-wide">카테고리-월별매출&메뉴 통계</a>
+    <a href="/insight_category_region.php" class="btn btn-info btn-wide text-white">카테고리-지역 통계</a>
     <a href="restaurant_search.php" class="btn btn-secondary btn-wide">식당 검색</a>
   </div>
 

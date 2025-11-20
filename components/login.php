@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php';  // connectDB() 사용
+require_once '../sql/db.php';  // connectDB() 사용
 
 $errors = [];
 $email = '';
