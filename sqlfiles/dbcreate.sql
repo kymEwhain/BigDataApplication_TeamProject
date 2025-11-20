@@ -94,17 +94,3 @@ CREATE TABLE Favorite (
   INDEX idx_fav_user (user_id),
   INDEX idx_fav_rest (rest_id)
 );
-
-CREATE TABLE Favorite (
-  fav_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  rest_id INT NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-
-  FOREIGN KEY (user_id) REFERENCES User(user_id),
-  FOREIGN KEY (rest_id) REFERENCES Restaurant(rest_id),
-
-  UNIQUE KEY uk_favorite (user_id, rest_id),
-  KEY ix_fav_user (user_id),
-  KEY ix_fav_rest (rest_id)
-);
