@@ -36,7 +36,8 @@ $monthly = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $sql_menu = "
     SELECT
         m.product_name,
-        SUM(o.quantity) AS total_qty
+        SUM(o.quantity) AS total_qty,
+        RANK() OVER (ORDER BY SUM(o.quantity) DESC) AS rank_qty
     FROM OrderHistory o
     JOIN Menu m ON o.menu_id = m.menu_id
     WHERE m.category_id = ?
@@ -146,7 +147,7 @@ const sales = monthly.map(r => r.monthly_total);
 const cumulative = monthly.map(r => r.cumulative_sales);
 
 // 메뉴별
-const menuLabels = menuStats.map(m => m.product_name);
+const menuLabels = menuStats.map(m => `${m.rank_qty}. ${m.product_name}`);
 const menuQty = menuStats.map(m => m.total_qty);
 
 // ***** 라인 차트 *****
