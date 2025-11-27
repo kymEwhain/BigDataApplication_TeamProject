@@ -1,3 +1,5 @@
+use team01;
+
 CREATE TABLE User (
   user_id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(80) NOT NULL,

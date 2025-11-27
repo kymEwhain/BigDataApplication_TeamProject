@@ -1,3 +1,5 @@
+use team01;
+
 INSERT INTO Category (category_id, name) VALUES
 (1, 'Korean'),
 (2, 'Japanese'),
